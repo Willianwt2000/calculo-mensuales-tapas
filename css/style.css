@@ -63,6 +63,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
   nav {
     display: none;
@@ -106,6 +107,12 @@ footer {
     flex-wrap: wrap;
     gap: 10px;
   }
+
+  tbody {
+    max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: auto; /* Agrega una barra de scroll vertical si es necesario */
+  }
+  
 
   button {
     padding: 10px 20px;
