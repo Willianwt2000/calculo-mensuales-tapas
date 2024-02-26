@@ -1,47 +1,42 @@
+// Variables globales
 const $cantidad = document.getElementById("cantidad");
-const $btnAgregar = document.getElementById("agregar");
+const $precioApagar = document.getElementById("precio");
 const $totalPaquetes = document.getElementById("totalPaquetes");
 const $pagoTotal = document.getElementById("pagoTotal");
 const $tbody = document.querySelector("tbody");
-let $totalPago = 0; // Variable para almacenar el total del pago
-let $paquetesEnTotal = 0; // Variable para almacenar el total de los paquetes
+const $btnAgregar = document.getElementById("agregar");
+const $btnLimpiar = document.getElementById("limpiar");
+let registros = []; // Array para almacenar los registros de la tabla
 
+// Función para agregar un registro
 function agregarRegistro() {
-  // Crear un fragmento
-  let $fragment = document.createDocumentFragment();
-  let $precioDePaquetes = 25;
+  if (!$cantidad.value || !$precioApagar.value) {
+    alert("Por favor asegúrese de completar los campos");
+    return false;
+  }
+  
+  // Crear objeto para el registro
+  const nuevoRegistro = {
+    cantidad: $cantidad.value,
+    fecha: formatearFecha(new Date()),
+    precio: `$${$precioApagar.value}`
+  };
 
-  let $tr = document.createElement("tr");
+  // Agregar el registro al array de registros
+  registros.push(nuevoRegistro);
 
-  let $tdPaquetes = document.createElement("td");
-  let $tdDate = document.createElement("td");
-  let $tdPrecio = document.createElement("td");
+  // Actualizar la tabla
+  renderizarTabla();
 
-  // Asignar los valores a las celdas
-  $tdPaquetes.textContent = $cantidad.value;
+  // Actualizar el total del pago y cantidad de paquetes en total
+  actualizarTotales();
 
-  const fechaActual = new Date();
-  $tdDate.textContent = formatearFecha(fechaActual);
+  // Limpiar campos
+  $cantidad.value = '';
+  $precioApagar.value = '';
 
-  $tdPrecio.textContent = `$${$precioDePaquetes}`
-
-  // Añadir las celdas a la fila
-  $tr.appendChild($tdPaquetes);
-  $tr.appendChild($tdDate);
-  $tr.appendChild($tdPrecio);
-
-  $fragment.appendChild($tr);
-
-  $tbody.appendChild($fragment);
-
-  // Actualizar el total del pago
-  $totalPago += parseInt($precioDePaquetes) * parseInt($cantidad.value);
-  $pagoTotal.textContent = `$${$totalPago}`;
-
-  // Actualizar cantidad de paquetes en total
-  $paquetesEnTotal += Number( $cantidad.value);
-  $totalPaquetes.textContent = `$${$paquetesEnTotal}`;
-
+  // Guardar los datos en el almacenamiento local
+  guardarDatos();
 }
 
 function formatearFecha(fecha) {
@@ -54,4 +49,62 @@ function formatearFecha(fecha) {
   return fecha.toLocaleDateString('es-ES', opciones);
 }
 
+// Función para limpiar los registros y el almacenamiento local
+function limpiarRegistro() {
+  // Limpiar registros en la tabla
+  $tbody.innerHTML = '';
+
+  // Limpiar array de registros
+  registros = [];
+
+  // Actualizar totales en la página
+  actualizarTotales();
+
+  // Borrar datos del almacenamiento local
+  localStorage.removeItem('datosRegistro');
+}
+
+// Función para renderizar la tabla
+function renderizarTabla() {
+  $tbody.innerHTML = ''; // Limpiar contenido existente
+  registros.forEach(registro => {
+    const $tr = document.createElement("tr");
+    Object.values(registro).forEach(valor => {
+      const $td = document.createElement("td");
+      $td.textContent = valor;
+      $tr.appendChild($td);
+    });
+    $tbody.appendChild($tr);
+  });
+}
+
+// Función para actualizar totales
+function actualizarTotales() {
+  let totalPago = 0;
+  let paquetesEnTotal = 0;
+  registros.forEach(registro => {
+    totalPago += parseInt(registro.precio.replace('$', '')) * parseInt(registro.cantidad);
+    paquetesEnTotal += parseInt(registro.cantidad);
+  });
+  $pagoTotal.textContent = `$${totalPago}`;
+  $totalPaquetes.textContent = paquetesEnTotal;
+}
+
+// Función para guardar los datos en el almacenamiento local
+function guardarDatos() {
+  localStorage.setItem('datosRegistro', JSON.stringify(registros));
+}
+
+// Event Listeners
 $btnAgregar.addEventListener("click", agregarRegistro);
+$btnLimpiar.addEventListener("click", limpiarRegistro);
+
+// Verificar si hay datos almacenados en el almacenamiento local y restaurarlos si es necesario
+window.addEventListener('load', function () {
+  const datosGuardados = localStorage.getItem('datosRegistro');
+  if (datosGuardados) {
+    registros = JSON.parse(datosGuardados);
+    renderizarTabla();
+    actualizarTotales();
+  }
+});

@@ -1,3 +1,5 @@
+
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -44,11 +46,11 @@ article {
 footer {
   background-color: #333;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 0 10px 0;
   text-align: center;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
 }
 
 
@@ -56,6 +58,12 @@ footer {
 
 @media screen and (max-width: 500px) {
 
+  header {
+    color: rgb(0, 204, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   nav {
     display: none;
   }
@@ -75,7 +83,7 @@ footer {
   th {
     background-color: #f2f2f2;
   }
-
+  .precio,
   .cantidad {
     width: 130px;
     padding: 8px 20px;
@@ -83,34 +91,110 @@ footer {
     border: solid 2px gray;
     outline: none;
     height: auto;
-}
+  }
 
-.cantidad:focus {
-  border-color: #24a80a;
-  outline: none;
-  box-shadow: 0 0 5px #24a80a;
-}
-.agregar {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  margin-left: 10px;
-  border-radius: 5px;
-  cursor: pointer; 
-  user-select: none;
-  transition: background-color 0.3s ease;
-}
+  .cantidad:focus {
+    border-color: #24a80a;
+    outline: none;
+    box-shadow: 0 0 5px #24a80a;
+  }
 
-.agregar:hover {
-  background-color: #45a049;
-}
+  .btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
-.agregar:focus {
-  outline: none; /* Elimina el contorno al hacer clic */
-}
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
 
-#total {
-  text-align: left;
-}
+  .agregar {
+    order: -1;
+  }
+
+  .limpiar {
+    background-color: rgb(173, 50, 50);
+  }
+
+  .agregar:hover {
+    background-color: #45a049;
+  }
+
+  .agregar:focus {
+    outline: none;
+    /* Elimina el contorno al hacer clic */
+  }
+
+  #total {
+    text-align: left;
+  }
+
+  footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: auto;
+  }
+
+  .contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: auto;
+    width: 100%;
+  }
+  footer  .brand {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .contact-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  
+  footer p{
+    font-size: 14px;
+  }
+
+  footer .social-media {
+    flex: 1;
+    text-align: center;
+    user-select: none;
+  } 
+  
+
+  .social-media-icon {
+    margin: 0 10px;
+    font-size: 35px;
+    color: rgb(0, 204, 255);
+  }
+  
+
+
+  footer li {
+    list-style: none;
+  }
+
+  footer a{
+    text-decoration: none;
+    color: #fff;
+  }
+
 }
