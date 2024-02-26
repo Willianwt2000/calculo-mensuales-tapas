@@ -3,20 +3,19 @@ const $btnAgregar = document.getElementById("agregar");
 const $totalPaquetes = document.getElementById("totalPaquetes");
 const $pagoTotal = document.getElementById("pagoTotal");
 const $tbody = document.querySelector("tbody");
+let $totalPago = 0; // Variable para almacenar el total del pago
+let $paquetesEnTotal = 0; // Variable para almacenar el total de los paquetes
 
 function agregarRegistro() {
   // Crear un fragmento
   let $fragment = document.createDocumentFragment();
   let $precioDePaquetes = 25;
 
-  // Crear una nueva fila
   let $tr = document.createElement("tr");
 
-  // Crear tres celdas
   let $tdPaquetes = document.createElement("td");
   let $tdDate = document.createElement("td");
   let $tdPrecio = document.createElement("td");
-
 
   // Asignar los valores a las celdas
   $tdPaquetes.textContent = $cantidad.value;
@@ -31,11 +30,18 @@ function agregarRegistro() {
   $tr.appendChild($tdDate);
   $tr.appendChild($tdPrecio);
 
-  // Añadir la fila al fragmento
   $fragment.appendChild($tr);
 
-  // Añadir el fragmento al tbody
   $tbody.appendChild($fragment);
+
+  // Actualizar el total del pago
+  $totalPago += parseInt($precioDePaquetes) * parseInt($cantidad.value);
+  $pagoTotal.textContent = `$${$totalPago}`;
+
+  // Actualizar cantidad de paquetes en total
+  $paquetesEnTotal += Number( $cantidad.value);
+  $totalPaquetes.textContent = `$${$paquetesEnTotal}`;
+
 }
 
 function formatearFecha(fecha) {
@@ -47,7 +53,5 @@ function formatearFecha(fecha) {
   };
   return fecha.toLocaleDateString('es-ES', opciones);
 }
-
-
 
 $btnAgregar.addEventListener("click", agregarRegistro);
