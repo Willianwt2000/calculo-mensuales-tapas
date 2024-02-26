@@ -46,30 +46,48 @@ article {
 footer {
   background-color: #333;
   color: #fff;
-  padding: 5px 0 0px 0;
+  padding: 5px 0; 
   text-align: center;
+  font-size: 12px; 
+} 
+
+
+.social-media-icon {
+  display: inline-block;
+  margin-left: 20px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+}
+
+.social-media-icon:hover {
+  background: #fff;
+  color: #764ba2;
+}
+
+.social-media-icon i {
+  font-size:25px;
+  line-height: 40px;
+}
+
+.line {
+  width: 90%;
+  max-width:1200px;
+  margin: 0 auto;
+  height: 2px;
+  background: #fff;
+  margin-bottom: 60px;
 }
 
 
-
-
 @media screen and (max-width: 500px) {
-
-  header {
-    color: rgb(0, 204, 255);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
   nav {
     display: none;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
 
   th,
   td {
@@ -105,11 +123,12 @@ footer {
     gap: 10px;
   }
 
-  tbody {
-    max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
-    overflow-y: hidden; /* Agrega una barra de scroll vertical si es necesario */
+
+  .registro-container {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
   }
-  
 
   button {
     padding: 10px 20px;
@@ -141,15 +160,6 @@ footer {
 
   #total {
     text-align: left;
-  }
-
-  footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: auto;
   }
 
   .contenedor {
