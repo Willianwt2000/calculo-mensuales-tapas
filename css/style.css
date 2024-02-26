@@ -46,11 +46,8 @@ article {
 footer {
   background-color: #333;
   color: #fff;
-  padding: 10px 0 10px 0;
+  padding: 5px 0 0px 0;
   text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100vw;
 }
 
 
@@ -110,7 +107,7 @@ footer {
 
   tbody {
     max-height: 200px; /* Ajusta la altura máxima según tus necesidades */
-    overflow-y: auto; /* Agrega una barra de scroll vertical si es necesario */
+    overflow-y: hidden; /* Agrega una barra de scroll vertical si es necesario */
   }
   
 
